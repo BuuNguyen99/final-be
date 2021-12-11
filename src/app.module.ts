@@ -1,22 +1,14 @@
 import { AuthModule } from '@app/auth';
-import { User } from '@app/users/entity/user.entity';
+import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from '@app/users/users.module';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost/nest'),
     AuthModule,
     UsersModule,
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'database/db',
-      entities: [User],
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
   ],
   controllers: [AppController],
   providers: [AppService],
