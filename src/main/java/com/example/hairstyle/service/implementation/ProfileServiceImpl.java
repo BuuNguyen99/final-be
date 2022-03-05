@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
@@ -101,7 +102,7 @@ public class ProfileServiceImpl implements ProfileService {
         profilePages = profileRepository.findByRole(roleId, paging);
 
         if (profilePages.isEmpty()) {
-            return ResponseEntity.ok().body(new MessageResponse(true, ResponseText.NO_DATA_RETRIEVAL));
+            return ResponseEntity.ok().body(new ArrayList<Profile>());
         }
 
         var resultList = new PagingResponse<Profile>();
